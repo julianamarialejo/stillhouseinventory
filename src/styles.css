@@ -1,0 +1,269 @@
+/* top of src/styles.css */
+@font-face {
+  font-family: "Helvetica World";
+  src: url('/fonts/HelveticaWorld-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica World";
+  src: url('/fonts/HelveticaWorld-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* use the font globally */
+:root {
+  font-family: "Helvetica World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --bg: #f5f1ea;
+  --sidebar:#1e1e1e;
+  --accent:#e7dec8;
+  --card:#ffffff;
+  --muted:#7e7e7e;
+  --primary:#3571ff;
+  --success:#b8f2c6;
+  --danger:#ff6b6b;
+  --shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+*{box-sizing:border-box}
+html,body,#app{height:100%; margin:0}
+body{
+  background:var(--bg);
+  color:#222;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+html, body {
+  -webkit-font-synthesis: weight style;
+  font-synthesis: weight style;
+}
+
+.card-title {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.profile .username {
+  font-weight: 700;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  width: 100vw;      
+  height: 100vh;    
+  gap: 0;        
+  align-items: stretch; 
+  overflow: hidden;   
+}
+
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: var(--sidebar);
+  color: var(--accent);
+  padding: 20px 20px;
+  height: 100vh;
+  flex-shrink: 0;
+}
+.logo{
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 28px;
+}
+.menu .item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border-radius:14px;
+  margin-bottom:12px;
+  cursor:pointer;
+  color:var(--accent);
+}
+
+.menu .item .icon{
+  font-size: 18px;
+}
+
+.menu .item.active{
+  background:var(--accent);
+  color:#221f1c;
+}
+
+/* --- SEARCH LOGO FIX --- */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 15px 10px 42px !important;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  outline: none;
+}
+
+.content {
+  flex: 1;
+  height: 100vh;
+  padding: 15px 40px 40px 40px;
+  background-color: #F9F9F7;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* ✅ Inventory ONLY: force topbar layout so search can sit on the right */
+.content.inventory-page .topbar{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.content.inventory-page .search-wrap{
+  margin-left: auto !important;
+}
+
+/* Full screen ONLY for Inventory pages */
+.inventory-root{
+  width: 100%;
+  max-width: none !important;
+}
+
+.inventory-root .content{
+  width: 100%;
+  max-width: none !important;
+}
+
+.inventory-root .panel{
+  width: 100%;
+  max-width: none !important;
+}
+
+.content.inventory-shell {
+  padding: 0 !important;
+  background: transparent; /* optional; InventoryPage already has its own bg */
+}
+
+.row{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+.left-col{width:360px; display:flex; flex-direction:column; gap:18px}
+.right-col{flex:1; display:flex; flex-direction:column; gap:18px}
+
+.card{
+  background:var(--card);
+  border-radius:10px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,0.04);
+}
+
+.card-slider {
+  width: 100%;
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid #e5e7eb;
+  overflow-x: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* MODAL FIX - COMPACT HEIGHT & NO UNNECESSARY TEXT SPACE */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;      
+  justify-content: center;   
+  z-index: 9999;             
+}
+
+.modal {
+  width: 380px;              /* Fixed width para compact */
+  background: white;
+  padding: 15px 20px;        /* Siksik na padding */
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  position: relative;
+  /* Kinokontrol nito ang kabuuan */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                  /* Binawasan ang gap sa pagitan ng items */
+}
+
+/* ALIS NG SPACE SA TEXT (Top and Bottom) */
+.modal h3, 
+.modal .modal-title-simple, 
+.modal p,
+.modal label {
+  margin-top: 0 !important;
+  margin-bottom: 2px !important; /* Halos dikit na sila */
+  line-height: 1.1;             /* Binawasan ang line spacing */
+}
+
+.content:has(.inventory-root) {
+  padding: 0 !important;
+}
+
+/* --- THE REST OF YOUR ORIGINAL STYLES (UNTOUCHED) --- */
+.profile{display:flex;justify-content:space-between;align-items:center;}
+.avatar{width:64px; height:64px; border-radius:50%; background:linear-gradient(180deg,#eee,#ccc); display:flex;align-items:center;justify-content:center;font-size:20px;color:#777;}
+.logout-btn{background:#fff; border:1px solid #d0d8ff; color:#2b6be6; padding:8px 10px; border-radius:8px; cursor:pointer;}
+.inventory-rows{display:flex;flex-direction:column;gap:12px}
+.inv-row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f0f0f0}
+.inv-left{font-weight:700; font-size:18px}
+.inv-right{color:var(--muted)}
+.badge-unavail{display:inline-block; background:#fff0f0; color:#cc3740; border:1px solid rgba(204,55,64,0.18); padding:6px 10px; border-radius:8px; font-size:13px;}
+.avail-controls{display:flex; gap:12px; align-items:center;}
+.select, .date{padding:10px 12px; border-radius:8px; border:1px solid #e5e5e5; background:#fff; min-width:220px; display:flex;align-items:center;gap:8px;}
+.select select, .date input { border: none; outline:none; background:transparent; width:100%; font-size:14px; font-family:inherit; }
+.btn{background:var(--primary); color:white; border:none; padding:10px 14px; border-radius:6px; cursor:pointer}
+.btn.ghost{background:#fff;border:1px solid #ddd;color:#333}
+.btn.assign{background:#6b6b6b;border-radius:20px;padding:10px 20px;}
+.rentals{max-height:150px;overflow:auto;padding-right:6px;}
+.rental-row{display:flex; align-items:center; gap:10px; padding:10px 6px; border-bottom:1px solid #f3f3f3;}
+.unit-pill{background:#f0f0f0;padding:6px 10px;border-radius:10px;font-weight:700;margin-right:8px}
+.status{display:flex;align-items:center;gap:8px}
+.status-dot{width:12px;height:12px;border-radius:50%;background:#4c8bff;}
+.details-btn{border:1px solid #bfe0ff;background:white;padding:6px 10px;border-radius:6px;color:#2066d6;cursor:pointer}
+.table{width:100%;border-collapse:collapse;}
+.table thead tr{background:#e9efee;color:#333}
+.table th, .table td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:14px}
+.txns{max-height:220px; overflow:auto;}
+.avail-results{margin-top:12px; display:flex; flex-direction:column; gap:8px}
+.avail-item{display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:8px; background:#fafafa; border:1px solid #f0f0f0}
+
+@media (max-width:900px){
+  .app{flex-direction:column}
+  .sidebar{width:100%; display:flex; flex-direction:row; gap:20px; align-items:center}
+  .left-col{width:100%}
+}
+
