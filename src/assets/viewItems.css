@@ -1,6 +1,12 @@
 /* src/assets/viewItems.css */
-/* Clean single source: not cut, not zoomed-out, centered popups, menu opens right,
-   modal matches screenshot + photo left layout */
+/* ✅ CLEAN FINAL (no merge markers)
+   - Not cut, not zoomed-out
+   - Left title (Camera/Cameras) is BIG + BOLD
+   - Menu opens to the RIGHT (won’t be clipped)
+   - Calendar a bit smaller
+   - Add/Edit/Delete are CENTERED popups
+   - Add/Edit modal: PHOTO LEFT + FIELDS RIGHT
+*/
 
 .view-items-page{
   --rightBg:#f7f4ee;
@@ -32,7 +38,12 @@
 .view-items-page .grid,
 .view-items-page .left-panel,
 .view-items-page .right-panel,
-.view-items-page .card{ min-width:0; }
+.view-items-page .card,
+.view-items-page .info-grid,
+.view-items-page .info-col,
+.view-items-page .stats-grid{
+  min-width: 0;
+}
 
 /* ===== MAIN GRID ===== */
 .view-items-page .grid{
@@ -58,7 +69,7 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: var(--shadow);
-  overflow: visible;       /* ✅ allow menu to overflow */
+  overflow: visible; /* ✅ allow menu to overflow */
   position: relative;
 }
 
@@ -74,34 +85,28 @@
   gap: 10px;
 }
 
-/* Category dropdown (big like screenshot but not too huge) */
+/* ✅ BIG BOLD TITLE (no dropdown) */
+.view-items-page .cat-title{
+  width: 100%;
+  padding: 12px 4px;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.05;
+  color:#111;
+}
+
+/* (If you ever bring back the dropdown, it will look big too) */
 .view-items-page .cat-select{
   width: 100%;
   border: 1px solid rgba(0,0,0,.12);
   border-radius: 14px;
   padding: 14px 16px;
-
-  font-size: 32px;   /* ✅ BIGGER */
-  font-weight: 900;  /* ✅ BOLDER */
+  font-size: 32px;
+  font-weight: 900;
   line-height: 1.1;
-
   background:#fff;
   outline:none;
 }
-.view-items-page .cat-select{
-  width: 100%;
-  border: 1px solid rgba(0,0,0,.12);
-  border-radius: 14px;
-  padding: 14px 16px;
-
-  font-size: 32px;   /* ✅ BIGGER */
-  font-weight: 900;  /* ✅ BOLDER */
-  line-height: 1.1;
-
-  background:#fff;
-  outline:none;
-}
-
 
 /* ===== MENU (opens RIGHT side) ===== */
 .view-items-page .menu-wrap{
@@ -125,14 +130,12 @@
   font-weight: 900;
 }
 
+/* ✅ open to the right */
 .view-items-page .menu{
   position:absolute;
   top: 50px;
-
-  /* ✅ open to the right */
   left: calc(100% + 10px);
   right: auto;
-
   width: 220px;
   background:#fff;
   border: 1px solid rgba(0,0,0,.10);
@@ -191,6 +194,8 @@
 }
 .view-items-page .item-row:first-child{ border-top:none; }
 
+.view-items-page .item-row:hover{ background:#f7f9ff; }
+
 .view-items-page .item-row.active{
   background:#eaf2ff;
   border-left-color:#2f6bff;
@@ -228,6 +233,9 @@
   margin:4px 0 0;
   font-size: 13px;
   color:#8f8f8f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* STATUS BADGES */
@@ -240,7 +248,6 @@
   border: 1px solid transparent;
   white-space:nowrap;
 }
-
 .view-items-page .badge.good{ color: var(--goodText); border-color: var(--goodBorder); background:#f0fff0; }
 .view-items-page .badge.bad{ color: var(--badText); border-color: var(--badBorder); background:#fff3f3; }
 .view-items-page .badge.warn{ color: var(--warnText); border-color: var(--warnBorder); background:#fff4e3; }
@@ -284,12 +291,12 @@
   margin-bottom: 7px;
 }
 .view-items-page .v{
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 900;
   color:#111;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .view-items-page .status-wrap{
@@ -389,8 +396,8 @@
   text-align:center;
   font-weight: 900;
   font-size: 13px;
+  color:#1f1f1f;
 }
-
 .view-items-page .cal-nav{
   width: 26px;
   height: 26px;
@@ -401,6 +408,7 @@
   place-items:center;
   font-size: 16px;
   font-weight: 900;
+  color:#1f1f1f;
 }
 
 .view-items-page .cal-dow{
@@ -412,6 +420,7 @@
   text-align:center;
   font-size: 11px;
   color:#9a9a9a;
+  font-weight: 600;
 }
 
 .view-items-page .cal-days{
@@ -420,6 +429,7 @@
   gap: 10px;
   padding: 10px 6px 12px;
 }
+
 .view-items-page .cal-day{
   height: 28px;
   width: 28px;
@@ -427,9 +437,11 @@
   display:grid;
   place-items:center;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 999px;
   cursor:pointer;
+  user-select:none;
+  position: relative;
 }
 .view-items-page .cal-day.muted{ color:#c9c9c9; cursor: default; }
 .view-items-page .cal-day:not(.muted):hover{ background:#eaf2ff; }
@@ -443,7 +455,7 @@
   inset: 0;
   z-index: 99999;
   display: grid;
-  place-items: center;          /* ✅ center */
+  place-items: center;
   padding: 24px;
 }
 
@@ -455,7 +467,7 @@
   -webkit-backdrop-filter: blur(2px);
 }
 
-/* modal card like your screenshot */
+/* modal card */
 .view-items-page .inv-modal-card{
   position: relative;
   width: min(980px, calc(100% - 32px));
@@ -482,7 +494,7 @@
 .view-items-page .modal-head h3{
   margin:0;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 900;
   color:#1f1f1f;
 }
 .view-items-page .modal-x{
@@ -514,7 +526,7 @@
   font-size: 12px;
   color: #5f5f5f;
   margin-bottom: 10px;
-  font-weight: 700;
+  font-weight: 800;
 }
 .view-items-page .photo-box{
   width: 100%;
@@ -552,7 +564,6 @@
 /* right fields */
 .view-items-page .fields-pane{ min-width:0; }
 
-/* fields grid like screenshot */
 .view-items-page .modal-grid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
@@ -599,7 +610,6 @@
   margin-top: 16px;
 }
 
-/* buttons */
 .view-items-page .btn{
   height: 40px;
   padding: 0 16px;

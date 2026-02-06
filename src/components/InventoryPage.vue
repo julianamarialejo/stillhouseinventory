@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- src/components/InventoryPage.vue -->
 <template>
   <div class="view-items-page">
@@ -28,10 +29,39 @@
                   >
                     <span class="mi-ic">✎</span>
                     <span>Edit Item</span>
+=======
+<template>
+  <div class="view-items-page inv-page">
+    <div class="grid inv-grid">
+      <!-- LEFT -->
+      <section class="left-panel inv-left">
+        <div class="left-card inv-left-card">
+          <div class="left-head inv-left-head">
+            <div class="left-head-row">
+              <!-- Category dropdown like screenshot -->
+              <select class="cat-select inv-cat-select" v-model="selectedCategory">
+                <option v-for="c in categories" :key="c.key" :value="c.key">
+                  {{ c.label }}
+                </option>
+              </select>
+
+              <!-- menu -->
+              <div class="menu-wrap inv-menu-wrap" @click.stop>
+                <button class="menu-btn inv-menu-btn" type="button" @click="menuOpen = !menuOpen">▾</button>
+
+                <div class="menu" :class="{ hidden: !menuOpen }">
+                  <button class="menu-item" type="button" @click="menuOpen=false; openAddItem()">
+                    ＋ Add New Item
+                  </button>
+
+                  <button class="menu-item" type="button" :disabled="!activeItem" @click="menuOpen=false; openEditItem()">
+                    ✎ Edit Item
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
                   </button>
 
                   <div class="menu-sep"></div>
 
+<<<<<<< HEAD
                   <button
                     class="menu-item danger"
                     type="button"
@@ -40,17 +70,29 @@
                   >
                     <span class="mi-ic">🗑</span>
                     <span>Delete Item</span>
+=======
+                  <button class="menu-item danger" type="button" :disabled="!activeItem" @click="menuOpen=false; openDeleteItem()">
+                    🗑 Delete Item
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
+<<<<<<< HEAD
           <div class="item-list">
             <div
               v-for="it in items"
               :key="it.id"
               class="item-row"
+=======
+          <div class="item-list inv-item-list">
+            <div
+              v-for="it in items"
+              :key="it.id"
+              class="item-row inv-item-row"
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
               :class="{ active: it.id === activeId }"
               @click="select(it.id)"
             >
@@ -67,17 +109,31 @@
               </span>
             </div>
 
+<<<<<<< HEAD
             <div v-if="!items.length" class="inv-empty">No items yet.</div>
+=======
+            <div v-if="!items.length" class="inv-empty">
+              No items yet.
+            </div>
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
           </div>
         </div>
       </section>
 
       <!-- RIGHT -->
+<<<<<<< HEAD
       <section class="right-panel">
         <div class="card big">
           <div class="card-title">Equipment Information</div>
 
           <div class="info-grid">
+=======
+      <section class="right-panel inv-right">
+        <div class="card big inv-card-big">
+          <div class="card-title">Equipment Information</div>
+
+          <div class="info-grid inv-info-grid">
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
             <div class="info-col">
               <div><div class="k">Unit No.</div><div class="v">{{ activeItem?.info?.unitNo || '' }}</div></div>
               <div><div class="k">Brand</div><div class="v">{{ activeItem?.info?.brand || '' }}</div></div>
@@ -103,7 +159,11 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <div class="bottom-row">
+=======
+        <div class="bottom-row inv-bottom">
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
           <!-- history -->
           <div class="card">
             <div class="card-title">Rental History</div>
@@ -147,7 +207,11 @@
                 v-for="(d, i) in calendarDays"
                 :key="i"
                 class="cal-day"
+<<<<<<< HEAD
                 :class="{ muted: d.muted, selected: d.selected, 'has-order': d.hasOrder }"
+=======
+                :class="{ muted: d.muted, selected: d.selected, 'has-order': d.hasOrder, today: d.today }"
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
                 @click="selectDay(d)"
               >
                 {{ d.label }}
@@ -158,17 +222,26 @@
       </section>
     </div>
 
+<<<<<<< HEAD
     <!-- ADD -->
     <div class="inv-modal" :class="{ hidden: !itemModal.open || itemModal.mode !== 'add' }">
       <div class="inv-modal-overlay" @click="closeItemModal"></div>
 
       <div class="inv-modal-card" role="dialog" aria-modal="true">
+=======
+    <!-- ADD MODAL -->
+    <div class="modal" :class="{ hidden: !itemModal.open || itemModal.mode !== 'add' }">
+      <div class="modal-overlay" @click="closeItemModal"></div>
+
+      <div class="modal-card" role="dialog" aria-modal="true">
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
         <div class="modal-head">
           <h3>Add New {{ labelSingular }}</h3>
           <button class="modal-x" type="button" @click="closeItemModal">✕</button>
         </div>
 
         <form class="modal-body" @submit.prevent="saveItem">
+<<<<<<< HEAD
           <!-- ✅ photo LEFT, fields RIGHT -->
           <div class="modal-layout">
             <!-- LEFT PHOTO PANEL -->
@@ -250,22 +323,75 @@
                 <button type="submit" class="btn primary">Save Item</button>
               </div>
             </div>
+=======
+          <div class="modal-grid">
+            <div class="field" style="grid-column:1/-1;">
+              <label>Photo</label>
+              <div class="photo-row">
+                <div class="photo-preview">
+                  <span v-if="!form.icon" class="photo-placeholder">No photo</span>
+                  <img v-else :src="form.icon" alt="" />
+                </div>
+                <div class="photo-actions">
+                  <input type="file" accept="image/*" @change="onPhoto" />
+                  <button type="button" class="btn ghost" @click="form.icon=''">Remove</button>
+                  <small class="photo-hint">PNG/JPG recommended</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="field"><label>Unit No.</label><input v-model.trim="form.unitNo" required /></div>
+            <div class="field"><label>Brand</label><input v-model.trim="form.brand" required /></div>
+            <div class="field"><label>Name (List Title)</label><input v-model.trim="form.name" required /></div>
+            <div class="field"><label>Subtitle (List Sub)</label><input v-model.trim="form.sub" required /></div>
+            <div class="field"><label>Model</label><input v-model.trim="form.model" required /></div>
+            <div class="field"><label>Type</label><input v-model.trim="form.type" required /></div>
+
+            <div class="field">
+              <label>Status</label>
+              <select v-model="form.status" required>
+                <option value="">Select status</option>
+                <option>Available</option>
+                <option>Unavailable</option>
+                <option>Maintenance</option>
+              </select>
+            </div>
+
+            <div class="field"><label>Date Purchased</label><input v-model.trim="form.purchased" required /></div>
+            <div class="field"><label>Rental Price (₱ / day)</label><input v-model.number="form.pricePerDay" type="number" min="0" step="1" required /></div>
+          </div>
+
+          <p class="modal-error">{{ itemModal.error }}</p>
+
+          <div class="modal-actions">
+            <button type="button" class="btn ghost" @click="closeItemModal">Cancel</button>
+            <button type="submit" class="btn primary">Save Item</button>
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
           </div>
         </form>
       </div>
     </div>
 
+<<<<<<< HEAD
     <!-- EDIT -->
     <div class="inv-modal" :class="{ hidden: !itemModal.open || itemModal.mode !== 'edit' }">
       <div class="inv-modal-overlay" @click="closeItemModal"></div>
 
       <div class="inv-modal-card" role="dialog" aria-modal="true">
+=======
+    <!-- EDIT MODAL -->
+    <div class="modal" :class="{ hidden: !itemModal.open || itemModal.mode !== 'edit' }">
+      <div class="modal-overlay" @click="closeItemModal"></div>
+
+      <div class="modal-card" role="dialog" aria-modal="true">
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
         <div class="modal-head">
           <h3>Edit {{ labelSingular }}</h3>
           <button class="modal-x" type="button" @click="closeItemModal">✕</button>
         </div>
 
         <form class="modal-body" @submit.prevent="saveItem">
+<<<<<<< HEAD
           <!-- ✅ photo LEFT, fields RIGHT -->
           <div class="modal-layout">
             <!-- LEFT PHOTO PANEL -->
@@ -347,17 +473,69 @@
                 <button type="submit" class="btn primary">Save Changes</button>
               </div>
             </div>
+=======
+          <div class="modal-grid">
+            <div class="field" style="grid-column:1/-1;">
+              <label>Photo</label>
+              <div class="photo-row">
+                <div class="photo-preview">
+                  <span v-if="!form.icon" class="photo-placeholder">No photo</span>
+                  <img v-else :src="form.icon" alt="" />
+                </div>
+                <div class="photo-actions">
+                  <input type="file" accept="image/*" @change="onPhoto" />
+                  <button type="button" class="btn ghost" @click="form.icon=''">Remove</button>
+                  <small class="photo-hint">PNG/JPG recommended</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="field"><label>Unit No.</label><input v-model.trim="form.unitNo" required /></div>
+            <div class="field"><label>Brand</label><input v-model.trim="form.brand" required /></div>
+            <div class="field"><label>Name (List Title)</label><input v-model.trim="form.name" required /></div>
+            <div class="field"><label>Subtitle (List Sub)</label><input v-model.trim="form.sub" required /></div>
+            <div class="field"><label>Model</label><input v-model.trim="form.model" required /></div>
+            <div class="field"><label>Type</label><input v-model.trim="form.type" required /></div>
+
+            <div class="field">
+              <label>Status</label>
+              <select v-model="form.status" required>
+                <option value="">Select status</option>
+                <option>Available</option>
+                <option>Unavailable</option>
+                <option>Maintenance</option>
+              </select>
+            </div>
+
+            <div class="field"><label>Date Purchased</label><input v-model.trim="form.purchased" required /></div>
+            <div class="field"><label>Rental Price (₱ / day)</label><input v-model.number="form.pricePerDay" type="number" min="0" step="1" required /></div>
+          </div>
+
+          <p class="modal-error">{{ itemModal.error }}</p>
+
+          <div class="modal-actions">
+            <button type="button" class="btn ghost" @click="closeItemModal">Cancel</button>
+            <button type="submit" class="btn primary">Save Changes</button>
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
           </div>
         </form>
       </div>
     </div>
 
+<<<<<<< HEAD
     <!-- DELETE -->
     <div class="inv-modal" :class="{ hidden: !deleteOpen }">
       <div class="inv-modal-overlay" @click="closeDelete"></div>
 
       <!-- ✅ smaller delete modal -->
       <div class="inv-modal-card inv-modal-card-sm" role="dialog" aria-modal="true">
+=======
+    <!-- DELETE MODAL -->
+    <div class="modal" :class="{ hidden: !deleteOpen }">
+      <div class="modal-overlay" @click="closeDelete"></div>
+
+      <div class="modal-card" role="dialog" aria-modal="true">
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
         <div class="modal-head">
           <h3>Delete {{ labelSingular }}</h3>
           <button class="modal-x" type="button" @click="closeDelete">✕</button>
@@ -381,12 +559,16 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   </div>
 </template>
 
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from 'vue'
+<<<<<<< HEAD
 import { addInventoryItem, deleteInventoryItem, getItems, seedIfEmpty, updateInventoryItem } from '../lib/inventoryStore'
 
 const props = defineProps({
@@ -394,6 +576,24 @@ const props = defineProps({
   categories: { type: Array, default: null },
 })
 
+=======
+import {
+  addInventoryItem,
+  deleteInventoryItem,
+  getItems,
+  seedIfEmpty,
+  updateInventoryItem,
+} from '../lib/inventoryStore'
+
+const props = defineProps({
+  // passed from InventoryView
+  category: { type: String, default: 'cameras' },
+  // optional: if you want to pass a categories list from InventoryView later
+  categories: { type: Array, default: null },
+})
+
+/* categories used by dropdown */
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 const categories = computed(() => {
   if (Array.isArray(props.categories) && props.categories.length) return props.categories
   return [
@@ -405,6 +605,7 @@ const categories = computed(() => {
   ]
 })
 
+<<<<<<< HEAD
 /** ✅ Use selectedCategory (NOT props.category) so title updates if you switch categories later */
 const LABEL = { cameras:'Cameras', lenses:'Lenses', tripods:'Tripods', printer:'Printers', accessories:'Accessories' }
 const selectedCategory = ref(props.category)
@@ -413,10 +614,24 @@ watch(() => props.category, (v) => { selectedCategory.value = v })
 const categoryLabel = computed(() => LABEL[selectedCategory.value] || 'Items')
 
 const SINGULAR = { cameras: 'Camera', lenses: 'Lens', tripods: 'Tripod', printer: 'Printer', accessories: 'Accessory' }
+=======
+/* category selection */
+const selectedCategory = ref(props.category)
+watch(() => props.category, (v) => { selectedCategory.value = v })
+
+/* labels */
+const LABEL = { cameras: 'Cameras', lenses: 'Lenses', tripods: 'Tripods', printer: 'Printers', accessories: 'Accessories' }
+const SINGULAR = { cameras: 'Camera', lenses: 'Lens', tripods: 'Tripod', printer: 'Printer', accessories: 'Accessory' }
+const label = computed(() => LABEL[selectedCategory.value] || selectedCategory.value)
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 const labelSingular = computed(() => SINGULAR[selectedCategory.value] || 'Item')
 
 const fallbackIcon = '/vite.svg'
 
+<<<<<<< HEAD
+=======
+/* items */
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 const items = computed(() => getItems(selectedCategory.value))
 const activeId = ref(null)
 const activeItem = computed(() => items.value.find(x => x.id === activeId.value) || null)
@@ -425,7 +640,18 @@ watch(items, () => {
   if (!activeId.value && items.value.length) activeId.value = items.value[0].id
 }, { immediate: true })
 
+<<<<<<< HEAD
 function select(id){
+=======
+watch(selectedCategory, () => {
+  activeId.value = getItems(selectedCategory.value)[0]?.id || null
+  selectedDate.value = '2025-10-21'
+  calYear.value = 2025
+  calMonth.value = 9
+})
+
+function select(id) {
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   activeId.value = id
   selectedDate.value = null
 }
@@ -434,6 +660,10 @@ function select(id){
 const menuOpen = ref(false)
 onMounted(() => document.addEventListener('click', () => { menuOpen.value = false }))
 
+<<<<<<< HEAD
+=======
+/* pills */
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 function badgeClass(status) {
   const s = (status || '').toLowerCase()
   if (s.includes('unavailable')) return 'bad'
@@ -452,12 +682,17 @@ function smallPillClass(status) {
   return 'blue'
 }
 
+<<<<<<< HEAD
 const rentalsCompleted = computed(() =>
   (activeItem.value?.history || []).filter(h => (h.status || '').toLowerCase() === 'completed').length
 )
 const totalDaysRented = computed(() =>
   (activeItem.value?.history || []).reduce((sum, h) => sum + Number(h.days || 0), 0)
 )
+=======
+const rentalsCompleted = computed(() => (activeItem.value?.history || []).filter(h => (h.status || '').toLowerCase() === 'completed').length)
+const totalDaysRented = computed(() => (activeItem.value?.history || []).reduce((sum, h) => sum + Number(h.days || 0), 0))
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 
 /* seed sample */
 onMounted(() => {
@@ -470,20 +705,33 @@ onMounted(() => {
       status: 'Available',
       info: { unitNo: '00823', brand: 'Canon', model: '80d', type: 'DSLR', purchased: 'June, 2024', price: '₱500 / day' },
       history: [
+<<<<<<< HEAD
         { days:'04', code:'#CR01018', date:'Oct 1 - Oct 18', status:'Completed', start:'2025-10-01', end:'2025-10-18' },
         { days:'03', code:'#CR01007', date:'Oct 1 - Oct 3', status:'Cancelled', start:'2025-10-01', end:'2025-10-03' },
         { days:'05', code:'#CR00932', date:'Sept 1 - Sept 2', status:'Completed', start:'2025-09-01', end:'2025-09-02' },
+=======
+        { days:'04', code:'#CR01018', date:'Oct 18 - Oct 19', status:'Completed', start:'2025-10-18', end:'2025-10-19' },
+        { days:'03', code:'#CR01007', date:'Oct 8 - Oct 11', status:'Cancelled', start:'2025-10-08', end:'2025-10-11' },
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
       ],
     },
   ])
 })
 
 /* calendar */
+<<<<<<< HEAD
 const selectedDate = ref(null)
 const calYear = ref(2025)
 const calMonth = ref(9) // October (0-based)
 
 function pad2(n){ return String(n).padStart(2,'0') }
+=======
+const selectedDate = ref('2025-10-21')
+const calYear = ref(2025)
+const calMonth = ref(9)
+
+function pad2(n){ return String(n).padStart(2,"0") }
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 function toISO(y,m,d){ return `${y}-${pad2(m+1)}-${pad2(d)}` }
 
 const calTitle = computed(() => {
@@ -506,6 +754,7 @@ const calendarDays = computed(() => {
   const count = new Date(y, m + 1, 0).getDate()
   const prevCount = new Date(y, m, 0).getDate()
 
+<<<<<<< HEAD
   const out = []
   for(let i=0;i<start;i++){
     out.push({ label:String(prevCount - start + 1 + i), muted:true, selected:false, hasOrder:false, iso:null })
@@ -513,11 +762,27 @@ const calendarDays = computed(() => {
   for(let d=1; d<=count; d++){
     const iso = toISO(y, m, d)
     out.push({ label:String(d), muted:false, selected:selectedDate.value===iso, hasOrder:dayHasOrder(iso), iso })
+=======
+  const today = new Date()
+  const todayISO = toISO(today.getFullYear(), today.getMonth(), today.getDate())
+
+  const out = []
+  for(let i=0;i<start;i++){
+    out.push({ label:String(prevCount - start + 1 + i), muted:true, selected:false, hasOrder:false, today:false, iso:null })
+  }
+  for(let d=1; d<=count; d++){
+    const iso = toISO(y, m, d)
+    out.push({ label:String(d), muted:false, selected:selectedDate.value===iso, hasOrder:dayHasOrder(iso), today: iso===todayISO, iso })
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   }
   const total = start + count
   const remain = (7 - (total % 7)) % 7
   for(let i=1;i<=remain;i++){
+<<<<<<< HEAD
     out.push({ label:String(i), muted:true, selected:false, hasOrder:false, iso:null })
+=======
+    out.push({ label:String(i), muted:true, selected:false, hasOrder:false, today:false, iso:null })
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   }
   return out
 })
@@ -546,6 +811,7 @@ const filteredHistory = computed(() => {
   return rows.filter(h => h.start && h.end && iso >= h.start && iso <= h.end)
 })
 
+<<<<<<< HEAD
 /* add/edit */
 const itemModal = reactive({ open:false, mode:'add', editId:null, error:'' })
 const form = reactive({
@@ -555,6 +821,18 @@ const form = reactive({
 function resetForm(){
   Object.assign(form, { icon:'', unitNo:'', brand:'', model:'', name:'', sub:'', type:'', status:'', purchased:'', pricePerDay: null })
 }
+=======
+/* modals */
+const itemModal = reactive({ open:false, mode:'add', editId:null, error:'' })
+const form = reactive({
+  icon:'', unitNo:'', brand:'', model:'', name:'', sub:'', type:'', status:'', purchased:'', pricePerDay: 0,
+})
+
+function resetForm(){
+  Object.assign(form, { icon:'', unitNo:'', brand:'', model:'', name:'', sub:'', type:'', status:'', purchased:'', pricePerDay: 0 })
+}
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 function openAddItem(){
   itemModal.open = true
   itemModal.mode = 'add'
@@ -583,13 +861,21 @@ function openEditItem(){
     type: it.info?.type || '',
     status: it.status || '',
     purchased: it.info?.purchased || '',
+<<<<<<< HEAD
     pricePerDay: Number.isFinite(priceNum) ? priceNum : null,
+=======
+    pricePerDay: priceNum || 0,
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   })
 }
 function closeItemModal(){
   itemModal.open = false
   itemModal.error = ''
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 function onPhoto(e){
   const f = e.target.files?.[0]
   if(!f) return
@@ -600,6 +886,7 @@ function onPhoto(e){
 
 function saveItem(){
   itemModal.error = ''
+<<<<<<< HEAD
 
   // ✅ robust checks: treat 0 as valid, ignore spaces
   const requiredOk =
@@ -615,11 +902,15 @@ function saveItem(){
     !Number.isNaN(Number(form.pricePerDay))
 
   if(!requiredOk){
+=======
+  if(!form.unitNo || !form.brand || !form.model || !form.name || !form.sub || !form.type || !form.status || !form.purchased){
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
     itemModal.error = 'Please fill in all required fields.'
     return
   }
 
   const payload = {
+<<<<<<< HEAD
     icon: form.icon || '',
     name: String(form.name || '').trim(),
     sub: String(form.sub || '').trim(),
@@ -631,11 +922,28 @@ function saveItem(){
       type: String(form.type || '').trim(),
       purchased: String(form.purchased || '').trim(),
       price: `₱${Number(form.pricePerDay)} / day`,
+=======
+    icon: form.icon || undefined,
+    name: form.name,
+    sub: form.sub,
+    status: form.status,
+    info: {
+      unitNo: form.unitNo,
+      brand: form.brand,
+      model: form.model,
+      type: form.type,
+      purchased: form.purchased,
+      price: `₱${Number(form.pricePerDay || 0)} / day`,
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
     },
   }
 
   if(itemModal.mode === 'add'){
+<<<<<<< HEAD
     const created = addInventoryItem(selectedCategory.value, { ...payload, history: [] })
+=======
+    const created = addInventoryItem(selectedCategory.value, payload)
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
     activeId.value = created.id
   }else{
     updateInventoryItem(selectedCategory.value, itemModal.editId, payload)
@@ -669,7 +977,121 @@ function confirmDelete(){
   closeDelete()
 }
 
+<<<<<<< HEAD
 window.__inventoryOpenAdd = () => openAddItem()
 </script>
 
 <style src="../assets/viewItems.css"></style>
+=======
+/* hook */
+window.__inventoryOpenAdd = () => openAddItem()
+</script>
+
+<style scoped>
+/* ===== SIZING / PADDING FIXES to match screenshot ===== */
+
+/* tighten page: remove extra vertical spacing */
+.inv-page{
+  padding: 0;
+}
+
+.view-items-page{
+  overflow-x: hidden;
+  padding: 22px 26px 22px 0; /* no left padding */
+}
+
+.view-items-page .left-panel{
+  padding: 22px;
+  border-radius: 16px;
+}
+
+/* make the grid closer to screenshot proportions */
+.inv-grid{
+  grid-template-columns: 360px 1fr !important; /* left column width */
+  gap: 22px !important;
+  min-height: calc(100vh - 44px);
+}
+
+/* left background panel: closer to screenshot */
+.inv-left{
+  background: #cfd5cf !important;
+  padding: 20px !important;
+  min-height: calc(100vh - 0px);
+}
+
+/* left card should be narrower/taller like the screenshot */
+.inv-left-card{
+  border-radius: 18px !important;
+  margin-left: 25px;
+}
+
+/* left head: screenshot has a bit more breathing room */
+.inv-left-head{
+  padding: 16px 16px !important;
+}
+
+.left-head-row{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* dropdown width and look like screenshot */
+.inv-cat-select{
+  width: 100%;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0 10px;
+  background: #fff;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+/* menu button smaller */
+.inv-menu-btn{
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+}
+
+/* item rows: match screenshot spacing */
+.inv-item-row{
+  padding: 14px 16px !important;
+}
+
+/* empty text align like screenshot */
+.inv-empty{
+  padding: 14px 18px;
+  color:#8b8b8b;
+  font-size: 13px;
+}
+
+/* right panel should not stretch too wide */
+.inv-right{
+  max-width: 1160px;
+}
+
+/* top info card padding closer to screenshot */
+.inv-card-big{
+  padding: 24px 26px !important;
+}
+
+/* info grid columns tighten */
+.inv-info-grid{
+  gap: 20px !important;
+}
+
+/* bottom cards row: make calendar card a bit wider like screenshot */
+.inv-bottom{
+  grid-template-columns: 1fr 350px !important;
+}
+
+/* calendar day should look like screenshot underline style (optional)
+   If your global CSS already does it, ignore this. */
+:deep(.cal-day){
+  text-decoration: none;
+}
+</style>
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694

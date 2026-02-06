@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <!-- src/components/InventoryView.vue (your Categories + Items wrapper) -->
+=======
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 <template>
   <div class="page inventory-root">
     <div v-if="mode === 'categories'" class="content inventory-page">
@@ -46,10 +49,18 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
 
     <!-- Items view -->
     <div v-else class="itemsWrap">
       <InventoryPage :category="category" :categories="categories" />
+=======
+    
+
+    <!-- Items view (matches the original "view items" page design) -->
+    <div v-else class="itemsWrap">
+      <InventoryPage :category="category" />
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
     </div>
   </div>
 </template>
@@ -58,11 +69,16 @@
 import { computed, ref } from 'vue'
 import InventoryPage from './InventoryPage.vue'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 const mode = ref('categories')
 const category = ref('cameras')
 const q = ref('')
 
 const categories = [
+<<<<<<< HEAD
   { key: 'cameras', label: 'Cameras', desc: 'Canon and Sony cameras for photo and video shoots.', icon: '/icons/camera.png' },
   { key: 'lenses', label: 'Lenses', desc: 'Prime and zoom lenses for different shooting needs.', icon: '/icons/lense.png' },
   { key: 'tripods', label: 'Tripods', desc: 'Support gear for steady shots and stable setups.', icon: '/icons/tripod.png' },
@@ -70,6 +86,42 @@ const categories = [
   { key: 'accessories', label: 'Accessories', desc: 'Batteries, chargers, memory cards, and other add-ons.', icon: '/icons/accessories.png' },
 ]
 
+=======
+  {
+    key: 'cameras',
+    label: 'Cameras',
+    desc: 'Canon and Sony cameras for photo and video shoots.',
+    icon: '/icons/camera.png',
+  },
+  {
+    key: 'lenses',
+    label: 'Lenses',
+    desc: 'Prime and zoom lenses for different shooting needs.',
+    icon: '/icons/lense.png',
+  },
+  {
+    key: 'tripods',
+    label: 'Tripods',
+    desc: 'Support gear for steady shots and stable setups.',
+    icon: '/icons/tripod.png',
+  },
+  {
+    key: 'printer',
+    label: 'Printers',
+    desc: 'Photo printers and consumables for output & proofs.',
+    icon: '/icons/printer.png',
+  },
+  {
+    key: 'accessories',
+    label: 'Accessories',
+    desc: 'Batteries, chargers, memory cards, and other add-ons.',
+    icon: '/icons/accessories.png',
+  },
+]
+
+const categoryLabel = computed(() => categories.find(c => c.key === category.value)?.label || 'Items')
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 const filteredCategories = computed(() => {
   const s = q.value.toLowerCase()
   if (!s) return categories
@@ -82,12 +134,23 @@ function goItems(key) {
 }
 
 function openAddForSelected() {
+<<<<<<< HEAD
   mode.value = 'items'
+=======
+  // The item add modal is managed inside InventoryPage.
+  // We go to items view first (to match original flow), then open add.
+  mode.value = 'items'
+  // allow Vue to render InventoryPage first
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
   requestAnimationFrame(() => window.__inventoryOpenAdd?.())
 }
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+/* Bring back the original inventory look (light background + panel rows) */
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 :global(:root){
   --inv-bg: #f5f1ea;
   --inv-panel: #ffffff;
@@ -100,8 +163,19 @@ function openAddForSelected() {
   --inv-rowHover: #f6f8ff;
 }
 
+<<<<<<< HEAD
 .page{ background: var(--inv-bg); min-height: 100%; }
 .content{ padding: 26px 34px; }
+=======
+.page{
+  background: var(--inv-bg);
+  min-height: 100%;
+}
+
+.content{
+  padding: 26px 34px;
+}
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 
 .topbar{
   display:flex;
@@ -110,6 +184,7 @@ function openAddForSelected() {
   gap: 16px;
   margin-bottom: 25px;
 }
+<<<<<<< HEAD
 .h1{ margin:0; font-size: 29px; font-weight: 700; color: var(--inv-text); }
 
 /* search */
@@ -127,17 +202,68 @@ function openAddForSelected() {
   font-size: 12px;
   color: #333;
 }
+=======
+
+.h1{
+  margin:0;
+  font-size: 29px;
+  font-weight: 700;
+  color: var(--inv-text);
+}
+
+/* search */
+.search-wrap{
+  position: relative;
+  width: 260px;
+  margin-left: auto;
+}
+
+.search-wrap input{
+  width: 100%;
+  height: 34px;
+
+  padding-left: 34px;
+  padding-right: 12px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: none;
+
+  font-size: 12px;
+  color: #333;
+}
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 .search-ic{
   position: absolute;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
+<<<<<<< HEAD
   width: 18px;
   height: 18px;
   background: url("icons/search.png") no-repeat center / contain;
   pointer-events: none;
 }
 
+=======
+
+  width: 18px;
+  height: 18px;
+
+  background: url("icons/search.png") no-repeat center / contain;
+
+  pointer-events: none;
+}
+
+.search-wrap input{
+  padding-left: 34px;
+}
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 .panel{
   background: var(--inv-panel);
   border: 1px solid var(--inv-border);
@@ -145,6 +271,10 @@ function openAddForSelected() {
   box-shadow: var(--inv-shadow);
   overflow:hidden;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 .panel-head{
   display:flex;
   align-items:center;
@@ -152,6 +282,10 @@ function openAddForSelected() {
   padding: 12px 20px;
   background: #ffffff;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 .panel-title{ font-size: 16px; font-weight: 600; color: #2a2a2a; }
 
 .btn{
@@ -168,6 +302,10 @@ function openAddForSelected() {
   font-weight: 500;
   font-size: 12px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 .btn-plus{
   width: 18px;
   height: 18px;
@@ -255,7 +393,20 @@ function openAddForSelected() {
 
 .chev{ opacity:.7; font-weight: 900; font-size: 14px; }
 
+<<<<<<< HEAD
 .itemsWrap{ background: #f4f1ea; min-height: 100%; }
+=======
+/* Items wrapper top */
+.itemsWrap{ background: #f4f1ea; min-height: 100%; }
+.itemsTop{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 18px 22px 0 22px;
+}
+
+.itemsTitle{ font-weight: 800; font-size: 18px; color: var(--inv-text); }
+>>>>>>> 35cebd18a259046858aca6c03e4477ff62ab5694
 
 @media (max-width: 860px){
   .topbar{ flex-direction:column; align-items:flex-start; }
